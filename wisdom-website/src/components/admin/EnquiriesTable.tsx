@@ -7,7 +7,7 @@ export function EnquiriesTable() {
   const { respondToEnquiry } = useAdminStore();
   const [respondingTo, setRespondingTo] = useState<string | null>(null);
   const [response, setResponse] = useState('');
-  const [refresh, setRefresh] = useState(0);
+  const [, setRefresh] = useState(0);
 
   const enquiries = dataService.getEnquiries().filter((e) => e.status !== 'Resolved');
 
