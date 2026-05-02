@@ -1,5 +1,4 @@
 import { useAuthStore } from '../../stores/authStore';
-import { dataService } from '../../services/dataService';
 import { UserPlus, UserMinus } from 'lucide-react';
 
 interface FollowButtonProps {

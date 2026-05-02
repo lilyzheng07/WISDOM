@@ -1,25 +1,19 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { dataService } from '../../services/dataService';
 import { useAdminStore } from '../../stores/adminStore';
 import { Check, X } from 'lucide-react';
 
 export function MinorConnectionsTable() {
   const { approveMinorConnection, rejectMinorConnection } = useAdminStore();
-  const [refresh, setRefresh] = useState(0);
+  const [, setTick] = useState(0);
+  const refresh = useCallback(() => setTick((n) => n + 1), []);
 
   const connections = dataService.getConnections().filter(
     (c) => c.requiresAdminApproval && c.status === 'pending'
   );
 
-  const handleApprove = (id: string) => {
-    approveMinorConnection(id);
-    setRefresh((r) => r + 1);
-  };
-
-  const handleReject = (id: string) => {
-    rejectMinorConnection(id);
-    setRefresh((r) => r + 1);
-  };
+  const handleApprove = (id: string) => { approveMinorConnection(id); refresh(); };
+  const handleReject = (id: string) => { rejectMinorConnection(id); refresh(); };
 
   if (connections.length === 0) {
     return <p className="text-wisdom-text/50 text-sm py-4">No pending minor connection requests.</p>;

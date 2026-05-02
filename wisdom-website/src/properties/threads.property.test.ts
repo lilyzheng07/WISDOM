@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, beforeEach } from 'vitest';
 import * as fc from 'fast-check';
 import { useBoardStore } from '../stores/boardStore';
 import { useAuthStore } from '../stores/authStore';

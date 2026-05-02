@@ -1,6 +1,6 @@
 import type { Event } from '../../types';
 import { dataService } from '../../services/dataService';
-import { X, Calendar, MapPin, User, Tag } from 'lucide-react';
+import { X, Calendar, MapPin, User } from 'lucide-react';
 
 interface EventDetailModalProps {
   event: Event;

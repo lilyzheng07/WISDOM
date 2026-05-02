@@ -13,17 +13,17 @@ const localStorageMock = {
   key: (index: number): string | null => Object.keys(localStorageStore)[index] ?? null,
 };
 
-Object.defineProperty(global, 'localStorage', {
+Object.defineProperty(globalThis, 'localStorage', {
   value: localStorageMock,
   writable: true,
 });
 
 // Mock crypto.randomUUID
-Object.defineProperty(global, 'crypto', {
+Object.defineProperty(globalThis, 'crypto', {
   value: {
     randomUUID: (): string => {
-      const hex = () => Math.floor(Math.random() * 16).toString(16);
-      return `${hex()}${hex()}${hex()}${hex()}-${hex()}${hex()}-4${hex()}${hex()}${hex()}-${hex()}${hex()}${hex()}${hex()}-${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}${hex()}`;
+      const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).slice(1);
+      return `${s4()}${s4()}-${s4()}-4${s4().slice(1)}-${s4()}-${s4()}${s4()}${s4()}`;
     },
   },
   writable: true,

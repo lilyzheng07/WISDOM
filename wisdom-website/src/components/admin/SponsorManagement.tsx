@@ -1,20 +1,18 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { dataService } from '../../services/dataService';
 import { useAdminStore } from '../../stores/adminStore';
 import { ToggleLeft, ToggleRight, Save } from 'lucide-react';
 
 export function SponsorManagement() {
   const { toggleSponsor, updateSettings } = useAdminStore();
-  const [refresh, setRefresh] = useState(0);
+  const [, setTick] = useState(0);
+  const refresh = useCallback(() => setTick((n) => n + 1), []);
   const [settings, setSettings] = useState(dataService.getSettings());
   const [saved, setSaved] = useState(false);
 
   const sponsors = dataService.getSponsors();
 
-  const handleToggle = (id: string, active: boolean) => {
-    toggleSponsor(id, active);
-    setRefresh((r) => r + 1);
-  };
+  const handleToggle = (id: string, active: boolean) => { toggleSponsor(id, active); refresh(); };
 
   const handleSaveSettings = () => {
     updateSettings(settings);

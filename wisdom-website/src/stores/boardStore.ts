@@ -17,7 +17,7 @@ interface BoardState {
   getVisibleThreads: (boardId: string, isAdmin: boolean) => Thread[];
 }
 
-export const useBoardStore = create<BoardState>()((set, get) => ({
+export const useBoardStore = create<BoardState>()((set) => ({
   boards: [],
   threads: [],
   replies: [],

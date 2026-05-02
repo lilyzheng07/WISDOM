@@ -1,4 +1,4 @@
-import { STEMCategory, Tag } from '../types';
+import type { STEMCategory, Tag } from '../types';
 
 export const STEM_TAXONOMY: Record<STEMCategory, string[]> = {
   Science:     ['Research Sciences', 'Biology', 'Chemistry', 'Psychology'],

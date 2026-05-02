@@ -15,7 +15,7 @@ const KEYS = {
   sponsors: 'wisdom_sponsors',
   spotlightProfiles: 'wisdom_spotlight_profiles',
   settings: 'wisdom_settings',
-  seeded: 'wisdom_seeded',
+  seeded: 'wisdom_seeded_v2',
 } as const;
 
 function getAll<T>(key: string): T[] {

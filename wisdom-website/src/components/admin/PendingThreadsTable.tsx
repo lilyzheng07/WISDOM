@@ -1,23 +1,17 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { dataService } from '../../services/dataService';
 import { useAdminStore } from '../../stores/adminStore';
 import { Check, X } from 'lucide-react';
 
 export function PendingThreadsTable() {
   const { approveThread, rejectThread } = useAdminStore();
-  const [refresh, setRefresh] = useState(0);
+  const [, setTick] = useState(0);
+  const refresh = useCallback(() => setTick((n) => n + 1), []);
 
   const threads = dataService.getThreads().filter((t) => t.status === 'pending');
 
-  const handleApprove = (id: string) => {
-    approveThread(id);
-    setRefresh((r) => r + 1);
-  };
-
-  const handleReject = (id: string) => {
-    rejectThread(id);
-    setRefresh((r) => r + 1);
-  };
+  const handleApprove = (id: string) => { approveThread(id); refresh(); };
+  const handleReject = (id: string) => { rejectThread(id); refresh(); };
 
   if (threads.length === 0) {
     return <p className="text-wisdom-text/50 text-sm py-4">No pending threads.</p>;
